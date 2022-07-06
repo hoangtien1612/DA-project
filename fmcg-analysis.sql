@@ -37,10 +37,6 @@ where (1 = 1)
 and date_of_order <= '2022-06-30'
 and vertical = 'FMCG' and status != 'cancel'
 group by 1,2,3,4,5,6,7,8,9,10,11,12) b
-left join
-(select distinct root_id, type
-from public.d_retailer_type) b1
-on b1.root_id = b.root_id
 group by 1) c
 left join
 (select month,  max(cnt) as total_root_id, count(month)
