@@ -6,6 +6,7 @@ We've asked for solving these tasks below:
 
 Task 1: Quick view about total retailers, active retailers (rate), orders, Total GMV, promotion(GMV), refund stock(GMV).
 
+```
 
 select
 c.month,
@@ -77,4 +78,6 @@ group by 1) f                                          -- Get data from others t
 on c.month = f.month
 where c.month is not null and c.month >= '2022-01-01' and c.month <= '2022-06-30'
 order by 1 desc
+
+```
 
