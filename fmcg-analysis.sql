@@ -39,41 +39,42 @@ from
          and vertical = 'FMCG' and status != 'cancel'
          group by 1,2,3,4,5,6,7,8,9,10,11,12) b
          group by 1) c
-left join
-(select month,  max(cnt) as total_root_id
-from
-(select date_trunc('month',coalesce(date_of_first_purchase, date_of_first_booking)::date)::date as month,
- (count(*) over (order by coalesce(date_of_first_purchase, date_of_first_booking) rows UNBOUNDED PRECEDING) ) 
+         left join
+               (select month,  max(cnt) as total_root_id
+                from
+                     (select date_trunc('month',coalesce(date_of_first_purchase, date_of_first_booking)::date)::date as month,
+                     (count(*) over (order by coalesce(date_of_first_purchase, date_of_first_booking) rows UNBOUNDED PRECEDING) ) as cnt
  
- -- accumulated count by window function to find total customers each month
+                    -- accumulated count by window function to find total customers each month
  
-as cnt
-from
-core.d_retailer_management d11
-left join
-(select distinct root_id, type
-from public.d_retailer_type) d12
-on d11.root_id = d12.root_id
-where (1 = 1)
-and d11.vertical = 'FMCG'
-and coalesce(date_of_first_purchase, date_of_first_booking)::date <= '2022-06-30'
-) d1
-group by 1
-)d
+               
+                      from
+                      core.d_retailer_management d11
+                      left join
+                     (select distinct root_id, type
+                     from public.d_retailer_type) d12
+                    on d11.root_id = d12.root_id
+                    where (1 = 1)
+                    and d11.vertical = 'FMCG'
+                    and coalesce(date_of_first_purchase, date_of_first_booking)::date <= '2022-06-30'
+                    ) d1
+               group by 1
+               )d
+               
 on c.month = d.month
 
 left join
-(select date_trunc('month', delivered_date)::date as month,
-sum((sku_qty_invoiced - sku_qty_refunded)* original_price) as delivered_gmv,
-sum(sku_qty_refunded* original_price) as oos_and_rf
-from core.f_retailer_transaction_detail f1
-left join
-(select distinct root_id, type
-from public.d_retailer_type) f2
-on f1.root_id = f2.root_id
-where f1.status = 'complete' and f1.vertical = 'FMCG'
-and delivered_date::date <= '2022-06-30'
-group by 1) f                                          -- Get data from others tables: Delivered GMV, Refund stocks GMV
+        (select date_trunc('month', delivered_date)::date as month,
+        sum((sku_qty_invoiced - sku_qty_refunded)* original_price) as delivered_gmv,
+        sum(sku_qty_refunded* original_price) as oos_and_rf
+        from core.f_retailer_transaction_detail f1
+          left join
+          (select distinct root_id, type
+          from public.d_retailer_type) f2
+          on f1.root_id = f2.root_id
+          where f1.status = 'complete' and f1.vertical = 'FMCG'
+          and delivered_date::date <= '2022-06-30'
+          group by 1) f                                          -- Get data from others tables: Delivered GMV, Refund stocks GMV
 on c.month = f.month
 where c.month is not null and c.month >= '2022-01-01' and c.month <= '2022-06-30'
 order by 1 desc
