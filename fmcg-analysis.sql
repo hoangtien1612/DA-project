@@ -26,7 +26,7 @@ from
      sum(sku_promotion) as sku_promotion,
      sum(order_promotion) as order_promotion,
      count(distinct b.root_id) as active_root_id
-     from                                                --- Subquery for grouping table by month to get Booking GMV, Promotion GMV, Active customers
+     from   --- Subquery for grouping table by month to get Booking GMV, Promotion GMV, Active customers
       
          (select so_number, warehouse_name, delivered_date, root_id , so_gross_booking,date_of_order, status, entity_id,city,vertical, branch, date_of_first_purchase::date,
          sum(original_price*sku_qty_invoiced) as booking_gmv,
@@ -45,7 +45,7 @@ from
                     (select date_trunc('month',coalesce(date_of_first_purchase, date_of_first_booking)::date)::date as month,
                     (count(*) over (order by coalesce(date_of_first_purchase, date_of_first_booking) rows UNBOUNDED PRECEDING) ) as cnt
  
- -- accumulated count by window function to find total customers each month
+                    -- accumulated count by window function to find total customers each month
  
 
                     from
@@ -73,7 +73,8 @@ left join
                on f1.root_id = f2.root_id
                where f1.status = 'complete' and f1.vertical = 'FMCG'
                and delivered_date::date <= '2022-06-30'
-           group by 1) f                             -- Get data from others tables: Delivered GMV, Refund stocks GMV
+           group by 1) f                             
+           -- Get data from others tables: Delivered GMV, Refund stocks GMV
 on c.month = f.month
 where c.month is not null and c.month >= '2022-01-01' and c.month <= '2022-06-30'
 order by 1 desc
