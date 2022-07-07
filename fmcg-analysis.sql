@@ -79,11 +79,11 @@ where c.month is not null and c.month >= '2022-01-01' and c.month <= '2022-06-30
 order by 1 desc
 
 -- - Looking at the table, we can see the customer growth is quite steady. The Active Rate index did not have a sudden growth. In February, all indexes are much lower than other months because February is Tet Holiday of Vietnam.
-   - The number of orders and Delivered GMV also changed markedly. This proves that customers have more demand to import goods.
+-- - The number of orders and Delivered GMV also changed markedly. This proves that customers have more demand to import goods.
 
-   - Delivered GMV in May and June are almost equal, while in June businesses used less promotion than in May.
+-- - Delivered GMV in May and June are almost equal, while in June businesses used less promotion than in May.
 
-   - Finally, businesses are having problems with out-of-stock items and returns. We can see it in the last column. This shows that demand increases, but supply            decreases.
+-- - Finally, businesses are having problems with out-of-stock items and returns. We can see it in the last column. This shows that demand increases, but supply            decreases.
 
 
 
