@@ -50,10 +50,6 @@ from
 
                     from
                     core.d_retailer_management d11
-                    left join
-                         (select distinct root_id, type
-                         from public.d_retailer_type) d12
-                    on d11.root_id = d12.root_id
                     where (1 = 1)
                     and d11.vertical = 'FMCG'
                     and coalesce(date_of_first_purchase, date_of_first_booking)::date <= '2022-06-30'
