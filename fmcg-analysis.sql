@@ -82,7 +82,8 @@ order by 1 desc
 
 -- - Delivered GMV in May and June are almost equal, while in June businesses used less promotion than in May.
 
--- - Finally, businesses are having problems with out-of-stock items and returns. We can see it in the last column. This shows that demand increases, but supply decreases.
+-- - Obviously, businesses are having problems with out-of-stock items and returns. We can see it in the last column. This shows that demand increases, but supply decreases.
+-- - Finally, it proves that if the firm can improve out of stock context, revenue will have steady growth even using less promotion than in May.
 
 
 
