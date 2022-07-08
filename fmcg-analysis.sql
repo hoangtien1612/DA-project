@@ -4,7 +4,7 @@
 
 -- We've asked for solving these tasks below:
 
--- Task 1: Quick view about total retailers, active retailers (rate), orders, Total GMV, promotion(GMV), refund stock(GMV).
+-- Task 1: QUICK VIEW about total retailers, active retailers (rate), orders, Total GMV, promotion(GMV), refund stock(GMV).
 
 
 select
