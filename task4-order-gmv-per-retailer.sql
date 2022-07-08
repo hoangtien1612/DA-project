@@ -4,7 +4,7 @@
 
 -- We've asked for solving these tasks below:
 
--- Task 4: Number of orders, revenue per each retailer in a half year of 2022.
+-- Task 4: Number of orders, revenue per retailer in a half year of 2022.
 
 
 
