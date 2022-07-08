@@ -26,7 +26,7 @@ limit 10
 
 
 -- - Looking at the table, we can see beer, beverages, cooking ingredients are the products contributing the best revenue. That proves Vietnam's people tend to like using alcohol beverages whenever, even winter season. 
-     This is also a main point that the firm focused on and created promotions related to beer and beverages. Definitely, these are products with intense competition among competitors in the market.
+--   This is also a main point that the firm focused on and created promotions related to beer and beverages. Definitely, these are products with intense competition among competitors in the market.
 
 
 
