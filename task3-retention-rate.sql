@@ -9,8 +9,8 @@
 SELECT
 count(distinct a.root_id),
 date_trunc('month',coalesce(date_of_first_purchase,date_of_first_booking)) as month,
-(extract(month from case when 'booking' = 'booking' then date_of_order else delivered_date end) - extract(month from coalesce(date_of_first_purchase,date_of_first_booking))) +
-12 * (extract(year from case when 'booking' = 'booking' then date_of_order else delivered_date end) - extract(year from coalesce(date_of_first_purchase,date_of_first_booking)))
+(extract(month from coalesce(date_of_order,delivered_date)) - extract(month from coalesce(date_of_first_purchase,date_of_first_booking))) +
+12 * (extract(month from coalesce(date_of_order,delivered_date)) - extract(year from coalesce(date_of_first_purchase,date_of_first_booking)))
 as period
 from core.f_retailer_transaction_detail a
 inner join
