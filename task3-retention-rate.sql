@@ -25,14 +25,12 @@ and (1 = 1)
 on a.root_id = b.root_id
 where
 (1 = 1)
-and case when 'complete' = 'full' then 'full' else status end = 'complete'
-
 
 and coalesce(date_of_first_purchase,date_of_first_booking) is not null
 and coalesce(date_of_first_purchase,date_of_first_booking)::date >= '2022-01-01' and coalesce(date_of_first_purchase,date_of_first_booking)::date <= '2022-06-30'
 and a.vertical in ('FMCG') and a.status != 'cancel'
 and a.date_of_order <= '2022-06-30'
-
+group by 2,3
 
 -- - Looking at the table, we can see that approximately 40% of new customers on average didn't intend to place the second order. 
 --   This is a group of retailers that includes retailers who placed a one-time order for personal or organizational purposes. 
